@@ -1,0 +1,70 @@
+1. What are the different QoS levels that MQTT provides? Provide an explanation of when you would use each of the QoS levels.
+
+    QoS 0: The message is delivered at most once, without any confirmation.
+        Use QoS 0 when occasional message loss is acceptable, and the system can tolerate some level of unreliability.
+    QoS 1: The message is delivered at least once.
+        Use QoS 1 when message delivery assurance is important, and it's acceptable to have occasional duplicate messages.
+    QoS 2: The message is guaranteed to be delivered exactly once to the receiver by using a four-step handshake.
+        Use QoS 2 when it is critical that messages are delivered exactly once and duplicates are not acceptable. 
+
+2. MQTT uses TCP under the hood. Why then would MQTT include QoS when TCP provides reliability?
+
+    While TCP provides a reliable communication channel, MQTT's QoS levels add an additional layer of control 
+    and assurance tailored to the characteristics of the publish-subscribe model, allowing for more nuanced and 
+    application-specific handling of message delivery.
+
+3. What are some benefits of using MQTT (provide 2 examples)? What are some disadvantages of using MQTT (provide 2 examples)?
+
+    Benefits:
+        1. Low Bandwidth Overhead
+            MQTT is designed to be a lightweight protocol, making it well-suited for 
+            constrained environments with low bandwidth or unreliable networks.
+            Example: 
+                In a remote monitoring system for industrial equipment, where sensors 
+                periodically send data to a central server for analysis, MQTT's low 
+                bandwidth overhead is advantageous. This ensures that even in low-bandwidth 
+                environments, the communication remains efficient, allowing for real-time 
+                monitoring and analysis without placing a significant burden on the network.
+        2. Asynchronous Communication
+            MQTT operates on a publish-subscribe model, allowing for asynchronous communication 
+            between devices. This means that devices can send and receive messages independently 
+            of each other, leading to a more responsive and scalable system
+            Example:
+                In a smart home automation system, where various devices (thermostats, lights, sensors) 
+                need to communicate with a central controller, MQTT's publish-subscribe model allows 
+                these devices to send updates independently.
+    Disadvantages:
+        1. Security Considerations
+            MQTT itself does not define security mechanisms. The responsibility for securing 
+            MQTT communication often falls on the implementer. If security measures are not 
+            properly implemented, there is a risk of unauthorized access, data interception, or tampering. 
+            Example:
+                n a healthcare application where patient health data is transmitted between medical devices 
+                and a central monitoring system using MQTT, if proper security measures (such as encryption 
+                and authentication) are not implemented, there is a risk of unauthorized access to sensitive patient information. 
+        2. Potential for Message Ordering Issues
+            MQTT's publish-subscribe model allows for asynchronous communication, and the order 
+            in which messages are received by subscribers is not guaranteed.
+            Example:
+                In a financial trading system where the order of transactions is crucial, the asynchronous 
+                nature of MQTT might pose challenges. If strict ordering of financial transactions is required, 
+                the inherent lack of guaranteed message ordering in MQTT could be a disadvantage.
+
+4. What are some commercial products that use MQTT (provide 2). Why do you think the company decided to use MQTT for that product?
+
+    1. Amazon IoT Core
+        It supports MQTT as one of the communication protocols. IoT Core allows 
+        devices to publish and subscribe to MQTT topics, making it easier to build 
+        scalable, secure, and reliable IoT applications on the AWS platform.
+    2. Microsoft Azure IoT Hub
+        Azure IoT Hub supports multiple protocols, including MQTT. It enables 
+        devices to send telemetry data to the cloud, as well as receive messages and commands.
+
+    I think the companies decided to use MQTT for their products because of 
+    the advantageous mentioned in the previous quesiton. Which includes, 
+        Efficiency in Low-Bandwidth Environments
+        Asynchronous Communication Model
+        Scalability
+        Quality of Service (QoS) Levels
+        Standardization and Broad Adoption
+        Ecosystem Integration
